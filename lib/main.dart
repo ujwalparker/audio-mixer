@@ -36,7 +36,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   //
   // Set the background messaging handler early on, as a named top-level function
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   //
   if (!kIsWeb) {
     /// Update the iOS foreground notification presentation options to allow
