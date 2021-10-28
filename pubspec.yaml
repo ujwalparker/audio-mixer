@@ -26,6 +26,7 @@ dependencies:
   audio_session: ^0.1.5
   rxdart: "^0.27.0"
   path_provider: 2.0.3
+  firebase_messaging: ^10.0.7
   ffmpeg_kit_flutter_audio: ^4.5.0
   just_audio:
 

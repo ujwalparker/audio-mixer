@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:core';
+import 'dart:async';
 
 import 'common.dart';
 import 'utils.dart';
@@ -8,6 +9,8 @@ import 'package:path/path.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:path_provider/path_provider.dart';
@@ -20,7 +23,33 @@ import 'package:ffmpeg_kit_flutter_audio/log.dart';
 import 'package:ffmpeg_kit_flutter_audio/session.dart';
 import 'package:ffmpeg_kit_flutter_audio/statistics.dart';
 
-void main() => runApp(MixingDemo());
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+  print('Handling a background message ${message.messageId}');
+}
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //
+  await Firebase.initializeApp();
+  //
+  // Set the background messaging handler early on, as a named top-level function
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  //
+  if (!kIsWeb) {
+    /// Update the iOS foreground notification presentation options to allow
+    /// heads up notifications.
+    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+  }
+  //
+  runApp(MixingDemo());
+}
 
 class MixingDemo extends StatefulWidget {
   MixingDemo({Key? key}) : super(key: key);
@@ -50,6 +79,23 @@ class _MixingDemoState extends State<MixingDemo> {
     ));
     _audioPlayer.setAsset('audio/recording-english-malayalam.m4a');
     _audioPlayer.setPitch(_audioPlayerPitch);
+    //
+    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+      if (message != null) {
+        print(message.data);
+      }
+    });
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null && !kIsWeb) {
+        print(notification.body);
+      }
+    });
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+      print(message.data);
+    });
     //
     FFmpegKitConfig.init().then((value) {
       FFmpegKitConfig.getFFmpegVersion().then((version) {

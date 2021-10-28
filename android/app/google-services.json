@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "182827522847",
+    "project_id": "ffmpeg-kit-209",
+    "storage_bucket": "ffmpeg-kit-209.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182827522847:android:48f5f1a993ecc5cff2ee2a",
+        "android_client_info": {
+          "package_name": "com.example.audio_effects"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "182827522847-idtvn42n568grvao6r1tujun6roirbui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4C-bIhAScIGm08iP4yR3JaJUs-f1yhEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "182827522847-idtvn42n568grvao6r1tujun6roirbui.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
