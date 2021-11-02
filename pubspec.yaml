@@ -25,10 +25,16 @@ dependencies:
     sdk: flutter
   audio_session: ^0.1.5
   rxdart: "^0.27.0"
-  path_provider: 2.0.3
-  firebase_messaging: ^10.0.7
-  ffmpeg_kit_flutter_audio: ^4.5.0
+  path_provider: ^2.0.4
+  firebase_messaging: ^10.0.9
+  ffmpeg_kit_flutter: ^4.5.0
   just_audio:
+  get_it: ^7.2.0
+  flutter_local_notifications: ^9.0.2
+
+dependency_overrides:
+  ffmpeg_kit_flutter:
+    path: ./ffmpeg-kit/flutter/flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -54,7 +60,6 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - audio/
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
