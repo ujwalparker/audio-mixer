@@ -14,14 +14,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:ffmpeg_kit_flutter_audio/ffmpeg_kit_config.dart';
-import 'package:ffmpeg_kit_flutter_audio/ffmpeg_kit.dart';
-import 'package:ffmpeg_kit_flutter_audio/return_code.dart';
-import 'package:ffmpeg_kit_flutter_audio/ffprobe_kit.dart';
-import 'package:ffmpeg_kit_flutter_audio/media_information_session.dart';
-import 'package:ffmpeg_kit_flutter_audio/log.dart';
-import 'package:ffmpeg_kit_flutter_audio/session.dart';
-import 'package:ffmpeg_kit_flutter_audio/statistics.dart';
+import 'package:ffmpeg_kit_flutter/ffmpeg_kit_config.dart';
+import 'package:ffmpeg_kit_flutter/ffmpeg_kit.dart';
+import 'package:ffmpeg_kit_flutter/return_code.dart';
+import 'package:ffmpeg_kit_flutter/ffprobe_kit.dart';
+import 'package:ffmpeg_kit_flutter/media_information_session.dart';
+import 'package:ffmpeg_kit_flutter/log.dart';
+import 'package:ffmpeg_kit_flutter/session.dart';
+import 'package:ffmpeg_kit_flutter/statistics.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -36,7 +36,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   //
   // Set the background messaging handler early on, as a named top-level function
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   //
   if (!kIsWeb) {
     /// Update the iOS foreground notification presentation options to allow
